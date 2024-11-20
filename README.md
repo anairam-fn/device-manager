@@ -47,22 +47,61 @@ The full API documentation is available at [`/api-docs`](http://localhost:3000/a
   npm install
   ```
 
-### Running the Project
-Start the services using Docker Compose:
-```bash
-docker-compose up -d
-```
-This will set up the required database and run the API.
+## Running the Project
 
-Start the API server:
-```bash
-npm start
-```
+Before running the project, ensure you have a `.env` file with the database credentials as specified in the `.env.example` file.
 
-Alternatively, you can use Make commands to run the project:
-```bash
-make start
-```
+### Using Docker and Makefile
+
+1. **Start the services and database**:
+  You can use the Makefile to set up the entire environment:
+  ```bash
+  make build
+  ```
+
+  This will:
+  - Install dependencies
+  - Set up the required database with Docker Compose
+  - Run the Prisma migrations
+  - Generate Prisma client
+
+2. **Start the API server**:
+  After the services are up, use the following command to start the application:
+  ```bash
+  make start
+  ```
+
+3. **Stop the services**:
+  To stop and remove the Docker containers, run:
+  ```bash
+  make stop
+  ```
+
+### Direct Commands (without Makefile)
+
+Alternatively, if you prefer not to use the Makefile, you can manually run the following commands:
+
+1. **Start the services with Docker Compose**:
+  ```bash
+  docker-compose up -d
+  ```
+
+2. **Start the API server**:
+  ```bash
+  npm start
+  ```
+
+3. **Run Prisma Migrations**:
+  To apply the Prisma migrations manually, use the following command:
+  ```bash
+  npx prisma migrate deploy
+  ```
+
+4. **Generate Prisma Client**:
+  If you need to regenerate the Prisma Client, run:
+  ```bash
+  npx prisma generate
+  ```
 
 Access the Swagger API documentation at:
 ```bash
