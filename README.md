@@ -138,4 +138,4 @@ Ensure you have the following environment variables configured in a `.env` file:
 ## Contributing
 Feel free to fork the repository, create a new branch, and submit pull requests for improvements or bug fixes.
 
-Enjoy managing your devices! 🚀
+Enjoy managing your devices! 🚀 
