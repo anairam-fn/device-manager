@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Device Manager",
+    "description": "API Documentation",
+    "license": { 
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Devices",
+      "description": "Devices API"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/device": {
+      "post": {
+        "tags": ["Devices"],
+        "summary": "Create a new device",
+        "parameters": [
+          {
+            "name": "device",
+            "in": "body",
+            "description": "Device object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "brand": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        }
+      }
+    },
+    "/devices": {
+      "get": {
+        "tags": ["Devices"],
+        "summary": "Get all devices",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Device"
+              }
+            }
+          },
+          "404": {
+            "description": "Devices not found"
+          }
+        }
+      }
+    },
+    "/device/{id}": {
+      "get": {
+        "tags": ["Devices"],
+        "summary": "Get a device by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "404": {
+            "description": "Error: Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Devices"],
+        "summary": "Update a device by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "device",
+            "in": "body",
+            "description": "Device object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "brand": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "404": {
+            "description": "Error: Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Devices"],
+        "summary": "Delete a device by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device deleted successfully"
+          },
+          "404": {
+            "description": "Error: Not Found"
+          }
+        }
+      }
+    },
+    "/devices/brand/{brand}": {
+      "get": {
+        "tags": ["Devices"],
+        "summary": "Get devices by brand",
+        "parameters": [
+          {
+            "name": "brand",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "404": {
+            "description": "Error: Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "required": ["id", "name", "brand"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

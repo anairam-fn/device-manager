@@ -1,4 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 import { router } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
@@ -22,5 +24,7 @@ app.use(router);
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   errorHandler(err, req, res, next);
 });
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 export default app;
