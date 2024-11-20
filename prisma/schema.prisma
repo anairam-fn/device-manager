@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Device {
+  id        Int      @id @default(autoincrement())
+  name      String
+  brand     String
+  createdAt DateTime @default(now())
+
+  @@unique([name, brand])
+}
+
